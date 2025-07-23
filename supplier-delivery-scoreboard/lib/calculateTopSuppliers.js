@@ -14,4 +14,4 @@ function calculateTopSuppliers(suppliers, orders) {
       .slice(0, 3);
   }
   
-  module.exports = { calculateTopSuppliers };
+  export { calculateTopSuppliers }; 
