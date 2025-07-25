@@ -2,23 +2,29 @@ export default function Table({ data, columns, title }) {
   if (!data || data.length === 0) {
     return (
       <div style={{
-        background: "linear-gradient(135deg, #f8fafc, #e2e8f0)",
-        borderRadius: "16px",
-        padding: "32px",
+        backgroundColor: "white",
+        border: "1px solid #e4e4e7",
+        borderRadius: "8px",
+        padding: "48px 24px",
         textAlign: "center",
         marginBottom: "24px",
-        border: "1px solid rgba(226, 232, 240, 0.5)",
-        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.05)"
+        boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)"
       }}>
         <div style={{
-          fontSize: "48px",
-          marginBottom: "16px",
-          opacity: "0.5"
+          width: "48px",
+          height: "48px",
+          backgroundColor: "#f4f4f5",
+          borderRadius: "8px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontSize: "20px",
+          margin: "0 auto 16px auto"
         }}>📊</div>
         <h3 style={{
-          color: "#64748b",
-          fontSize: "18px",
-          fontWeight: "600",
+          color: "#71717a",
+          fontSize: "16px",
+          fontWeight: "500",
           margin: "0"
         }}>
           No {title?.toLowerCase() || 'data'} available
@@ -29,40 +35,61 @@ export default function Table({ data, columns, title }) {
 
   return (
     <div style={{ 
-      marginBottom: "32px",
-      background: "white",
-      borderRadius: "20px",
+      marginBottom: "24px",
+      backgroundColor: "white",
+      border: "1px solid #e4e4e7",
+      borderRadius: "8px",
       overflow: "hidden",
-      boxShadow: "0 10px 25px rgba(0, 0, 0, 0.1), 0 4px 10px rgba(0, 0, 0, 0.05)",
-      border: "1px solid rgba(226, 232, 240, 0.3)"
+      boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)"
     }}>
       {/* Table Header */}
       <div style={{
-        background: "linear-gradient(135deg, #3b82f6, #2563eb)",
-        padding: "20px 24px",
-        borderBottom: "1px solid rgba(255, 255, 255, 0.1)"
+        backgroundColor: "#fafafa",
+        borderBottom: "1px solid #e4e4e7",
+        padding: "16px 20px"
       }}>
-        <h3 style={{ 
-          color: "white",
-          fontSize: "20px",
-          fontWeight: "700",
-          margin: "0",
+        <div style={{
           display: "flex",
           alignItems: "center",
-          gap: "12px",
-          letterSpacing: "0.025em"
+          justifyContent: "space-between"
         }}>
-          {title === "Suppliers" ? "🏢" : "📦"} {title}
-          <span style={{
-            background: "rgba(255, 255, 255, 0.2)",
-            padding: "4px 12px",
-            borderRadius: "12px",
-            fontSize: "14px",
-            fontWeight: "600"
+          <div style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "12px"
           }}>
-            {data.length}
-          </span>
-        </h3>
+            <div style={{
+              width: "24px",
+              height: "24px",
+              backgroundColor: "#f4f4f5",
+              borderRadius: "4px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: "12px"
+            }}>
+              {title === "Suppliers" ? "🏢" : "📦"}
+            </div>
+            <h3 style={{ 
+              color: "#09090b",
+              fontSize: "16px",
+              fontWeight: "600",
+              margin: "0"
+            }}>
+              {title}
+            </h3>
+          </div>
+          <div style={{
+            backgroundColor: "#f4f4f5",
+            color: "#71717a",
+            padding: "4px 8px",
+            borderRadius: "4px",
+            fontSize: "12px",
+            fontWeight: "500"
+          }}>
+            {data.length} {data.length === 1 ? 'item' : 'items'}
+          </div>
+        </div>
       </div>
 
       {/* Table Container */}
@@ -74,39 +101,25 @@ export default function Table({ data, columns, title }) {
         <table style={{ 
           borderCollapse: "collapse", 
           width: "100%",
-          fontSize: "15px",
-          fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+          fontSize: "14px",
+          fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
         }}>
           <thead style={{ position: "sticky", top: "0", zIndex: "10" }}>
             <tr>
               {columns.map((col, index) => (
                 <th key={col} style={{ 
-                  background: "linear-gradient(135deg, #f8fafc, #f1f5f9)",
-                  borderBottom: "2px solid #e2e8f0",
-                  padding: "16px 20px",
+                  backgroundColor: "#f8f9fa",
+                  borderBottom: "1px solid #e4e4e7",
+                  padding: "12px 16px",
                   textAlign: "left",
-                  fontWeight: "700",
-                  fontSize: "14px",
-                  color: "#374151",
+                  fontWeight: "500",
+                  fontSize: "12px",
+                  color: "#71717a",
                   textTransform: "uppercase",
-                  letterSpacing: "0.05em",
-                  position: "relative",
-                  borderRight: index < columns.length - 1 ? "1px solid #e5e7eb" : "none"
+                  letterSpacing: "0.025em",
+                  borderRight: index < columns.length - 1 ? "1px solid #f4f4f5" : "none"
                 }}>
-                  <div style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "8px"
-                  }}>
-                    {col.replace(/_/g, ' ')}
-                    <div style={{
-                      width: "4px",
-                      height: "4px",
-                      background: "#3b82f6",
-                      borderRadius: "50%",
-                      opacity: "0.6"
-                    }} />
-                  </div>
+                  {col.replace(/_/g, ' ')}
                 </th>
               ))}
             </tr>
@@ -116,19 +129,16 @@ export default function Table({ data, columns, title }) {
               <tr 
                 key={i} 
                 style={{ 
-                  background: i % 2 === 0 ? "white" : "rgba(248, 250, 252, 0.5)",
-                  transition: "all 0.2s ease",
+                  backgroundColor: "white",
+                  borderBottom: i === data.length - 1 ? "none" : "1px solid #f4f4f5",
+                  transition: "all 0.15s ease-in-out",
                   cursor: "pointer"
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "rgba(59, 130, 246, 0.05)";
-                  e.currentTarget.style.transform = "scale(1.001)";
-                  e.currentTarget.style.boxShadow = "0 2px 8px rgba(0, 0, 0, 0.1)";
+                  e.currentTarget.style.backgroundColor = "#f8f9fa";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = i % 2 === 0 ? "white" : "rgba(248, 250, 252, 0.5)";
-                  e.currentTarget.style.transform = "scale(1)";
-                  e.currentTarget.style.boxShadow = "none";
+                  e.currentTarget.style.backgroundColor = "white";
                 }}
               >
                 {columns.map((col, colIndex) => {
@@ -143,52 +153,26 @@ export default function Table({ data, columns, title }) {
                     <td 
                       key={col} 
                       style={{ 
-                        padding: "16px 20px",
-                        borderBottom: i === data.length - 1 ? "none" : "1px solid #f1f5f9",
-                        borderRight: colIndex < columns.length - 1 ? "1px solid #f1f5f9" : "none",
-                        verticalAlign: "middle",
-                        position: "relative"
+                        padding: "12px 16px",
+                        borderRight: colIndex < columns.length - 1 ? "1px solid #f4f4f5" : "none",
+                        verticalAlign: "middle"
                       }}
                     >
-                      <div style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "8px"
+                      <span style={{
+                        fontWeight: isId ? "500" : isNumeric ? "500" : "400",
+                        color: isId ? "#71717a" : 
+                               isNumeric ? "#09090b" : 
+                               isEmail ? "#6366f1" :
+                               isStatus ? "#f59e0b" :
+                               isDate ? "#71717a" : "#09090b",
+                        backgroundColor: isStatus ? "#fef3c7" : "transparent",
+                        padding: isStatus ? "2px 6px" : "0",
+                        borderRadius: isStatus ? "4px" : "0",
+                        fontSize: "14px",
+                        fontFamily: isId || isNumeric ? "'JetBrains Mono', 'Courier New', monospace" : "inherit"
                       }}>
-                        {isId && (
-                          <div style={{
-                            width: "8px",
-                            height: "8px",
-                            background: "linear-gradient(135deg, #10b981, #059669)",
-                            borderRadius: "50%",
-                            flexShrink: 0
-                          }} />
-                        )}
-                        <span style={{
-                          fontWeight: isId ? "600" : isNumeric ? "600" : "500",
-                          color: isId ? "#059669" : 
-                                 isNumeric ? "#3b82f6" : 
-                                 isEmail ? "#7c3aed" :
-                                 isStatus ? "#f59e0b" :
-                                 isDate ? "#6b7280" : "#374151",
-                          background: isStatus ? "rgba(245, 158, 11, 0.1)" : "transparent",
-                          padding: isStatus ? "4px 8px" : "0",
-                          borderRadius: isStatus ? "6px" : "0",
-                          fontSize: isId ? "13px" : "15px",
-                          fontFamily: isId || isNumeric ? "Monaco, 'Courier New', monospace" : "inherit"
-                        }}>
-                          {isDate && cellValue ? new Date(cellValue).toLocaleDateString() : cellValue}
-                        </span>
-                        {isNumeric && !isId && (
-                          <div style={{
-                            width: "4px",
-                            height: "4px",
-                            background: "#3b82f6",
-                            borderRadius: "50%",
-                            opacity: "0.4"
-                          }} />
-                        )}
-                      </div>
+                        {isDate && cellValue ? new Date(cellValue).toLocaleDateString() : cellValue}
+                      </span>
                     </td>
                   );
                 })}
@@ -196,44 +180,6 @@ export default function Table({ data, columns, title }) {
             ))}
           </tbody>
         </table>
-      </div>
-
-      {/* Table Footer */}
-      <div style={{
-        background: "linear-gradient(135deg, #f8fafc, #f1f5f9)",
-        padding: "12px 24px",
-        borderTop: "1px solid #e5e7eb",
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        fontSize: "14px",
-        color: "#6b7280"
-      }}>
-        <div style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "8px"
-        }}>
-          <div style={{
-            width: "6px",
-            height: "6px",
-            background: "#10b981",
-            borderRadius: "50%"
-          }} />
-          <span style={{ fontWeight: "500" }}>
-            {data.length} {data.length === 1 ? 'record' : 'records'}
-          </span>
-        </div>
-        <div style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "8px",
-          fontSize: "13px"
-        }}>
-          <span style={{ opacity: "0.7" }}>
-            {columns.length} columns
-          </span>
-        </div>
       </div>
     </div>
   );

@@ -2,7 +2,15 @@ import { supabase } from '@/lib/supabaseClient';
 
 export async function GET() {
   const { data: suppliers, error: supplierError } = await supabase.from('suppliers').select('*');
-  const { data: orders, error: orderError } = await supabase.from('orders').select('*');
+  
+  // Join orders with suppliers to get supplier names and only select needed columns
+  const { data: orders, error: orderError } = await supabase
+    .from('orders')
+    .select(`
+      suppliers(name),
+      estimated_date,
+      delivered_date
+    `);
 
   if (supplierError || orderError) {
     return Response.json({
@@ -10,5 +18,11 @@ export async function GET() {
     }, { status: 500 });
   }
 
-  return Response.json({ suppliers, orders });
+  const transformedOrders = orders?.map(order => ({
+    supplier_name: order.suppliers?.name || 'Unknown',
+    estimated_date: order.estimated_date,
+    delivered_date: order.delivered_date
+  })) || [];
+
+  return Response.json({ suppliers, orders: transformedOrders });
 }
